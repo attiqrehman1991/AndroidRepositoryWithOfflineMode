@@ -20,6 +20,7 @@ public class StaticInfo {
     public final static int ASYNC_SERVICES = 1;
     public final static int RX_SERVICES = 2;
     public final static int RETROFIT_SERVICES = 3;
+    public final static boolean JOB_QUEUE = true;
 
     public static int NETWORK_TYPE = RX_SERVICES;
     public static final String BASE_URL="http://localhost/";

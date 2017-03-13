@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2017.
+  ~ Sample Project Architecture for Repository Model in Android.
+  ~ Developed by Attiq Ur Rehman
+  ~ Senior Software Engineer
+  ~ Systems Limited Lahore
+  -->
+<account-authenticator xmlns:android="http://schemas.android.com/apk/res/android"
+    android:accountType="com.example.restaurant"
+    android:icon="@mipmap/ic_launcher"
+    android:label="@string/app_name"
+    android:smallIcon="@mipmap/ic_launcher" />

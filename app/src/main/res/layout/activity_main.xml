@@ -69,6 +69,12 @@
 
     </RelativeLayout>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:text="Choose web service host"
+        android:layout_above="@+id/layoutBottomBar"
+        android:layout_height="wrap_content" />
+
     <LinearLayout
         android:id="@+id/layoutBottomBar"
         android:layout_width="match_parent"

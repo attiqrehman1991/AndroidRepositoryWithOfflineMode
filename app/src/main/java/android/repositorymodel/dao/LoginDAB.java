@@ -8,12 +8,16 @@
 
 package android.repositorymodel.dao;
 
+import android.repositorymodel.RepositoryApplication;
 import android.repositorymodel.controller.MainController;
 import android.repositorymodel.factory.loginfactory.LoginFactory;
 import android.repositorymodel.factory.loginfactory.LoginStore;
+import android.repositorymodel.factory.loginfactory.QueueLoginJob;
 import android.repositorymodel.model.ParentObject;
 import android.repositorymodel.model.User;
 import android.repositorymodel.utilities.StaticInfo;
+
+import com.birbit.android.jobqueue.JobManager;
 
 import org.json.JSONObject;
 
@@ -51,8 +55,14 @@ public class LoginDAB extends ParentDAB {
         this.mainController = mainController;
 
         if (isInternet) {
-            LoginStore store = LoginFactory.getLoginFactory().getStore(StaticInfo.NETWORK_TYPE, LoginDAB.this);
-            store.save(parentObject);
+            if (StaticInfo.JOB_QUEUE) {
+                JobManager jobManager = RepositoryApplication.getInstance().getJobManager();
+                jobManager.addJobInBackground(new QueueLoginJob(parentObject, LoginDAB.this));
+            } else {
+                // to make direct network call
+                LoginStore store = LoginFactory.getLoginFactory().getStore(StaticInfo.NETWORK_TYPE, LoginDAB.this);
+                store.save(parentObject);
+            }
         } else {
             Realm realm = Realm.getDefaultInstance();
             User user = realm.where(User.class).findFirst();
