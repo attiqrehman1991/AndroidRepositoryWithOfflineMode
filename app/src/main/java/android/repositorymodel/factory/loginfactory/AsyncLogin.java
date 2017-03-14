@@ -9,7 +9,6 @@
 package android.repositorymodel.factory.loginfactory;
 
 import android.os.AsyncTask;
-import android.repositorymodel.controller.MainController;
 import android.repositorymodel.dao.ParentDAB;
 import android.repositorymodel.model.ParentObject;
 
@@ -50,7 +49,8 @@ public class AsyncLogin implements LoginStore {
 
         @Override
         protected void onPostExecute(JSONObject jsonObject) {
-            parentDAB.updateDAB(jsonObject);
+            if (parentDAB != null)
+                parentDAB.updateDAB(jsonObject);
         }
     }
 }

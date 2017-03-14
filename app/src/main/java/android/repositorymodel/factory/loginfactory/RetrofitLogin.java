@@ -51,7 +51,8 @@ public class RetrofitLogin implements LoginStore {
                 try {
                     jsonObject.put("username", "r_username");
                     jsonObject.put("password", "r_password");
-                    parentDAB.updateDAB(jsonObject);
+                    if (parentDAB != null)
+                        parentDAB.updateDAB(jsonObject);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -62,7 +63,8 @@ public class RetrofitLogin implements LoginStore {
                 try {
                     jsonObject.put("username", "r_username");
                     jsonObject.put("password", "r_password");
-                    parentDAB.updateDAB(jsonObject);
+                    if (parentDAB != null)
+                        parentDAB.updateDAB(jsonObject);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

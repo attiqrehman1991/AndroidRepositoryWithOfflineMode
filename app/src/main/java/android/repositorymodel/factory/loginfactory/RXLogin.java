@@ -56,7 +56,8 @@ public class RXLogin implements LoginStore {
                 } catch (JSONException e2) {
                     e2.printStackTrace();
                 }
-                parentDAB.updateDAB(jsonObject);
+                if (parentDAB != null)
+                    parentDAB.updateDAB(jsonObject);
             }
 
             @Override
@@ -67,7 +68,8 @@ public class RXLogin implements LoginStore {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                parentDAB.updateDAB(jsonObject);
+                if (parentDAB != null)
+                    parentDAB.updateDAB(jsonObject);
             }
         });
     }

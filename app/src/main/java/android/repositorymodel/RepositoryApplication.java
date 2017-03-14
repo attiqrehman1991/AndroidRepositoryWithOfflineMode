@@ -10,7 +10,7 @@ package android.repositorymodel;
 
 import android.app.Application;
 import android.os.Build;
-import android.repositorymodel.services.MyGcmJobService;
+import android.repositorymodel.services.MyFireBaseJobService;
 import android.repositorymodel.services.MyJobService;
 import android.util.Log;
 
@@ -18,9 +18,9 @@ import com.birbit.android.jobqueue.JobManager;
 import com.birbit.android.jobqueue.config.Configuration;
 import com.birbit.android.jobqueue.log.CustomLogger;
 import com.birbit.android.jobqueue.scheduling.FrameworkJobSchedulerService;
-import com.birbit.android.jobqueue.scheduling.GcmJobSchedulerService;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GoogleApiAvailability;
+import com.firebase.jobdispatcher.FirebaseJobDispatcher;
+import com.firebase.jobdispatcher.GooglePlayDriver;
+import com.firebase.jobdispatcher.Job;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
@@ -46,6 +46,7 @@ public class RepositoryApplication extends Application {
     }
 
     private void configureJobManager() {
+        FirebaseJobDispatcher dispatcher = new FirebaseJobDispatcher(new GooglePlayDriver(this));
         Configuration.Builder builder = new Configuration.Builder(this)
                 .customLogger(new CustomLogger() {
                     private static final String TAG = "JOBS";
@@ -80,16 +81,16 @@ public class RepositoryApplication extends Application {
                 .loadFactor(3)//3 jobs per consumer
                 .consumerKeepAlive(120);//wait 2 minute
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            builder.scheduler(FrameworkJobSchedulerService.createSchedulerFor(this,
-                    MyJobService.class), true);
+            builder.scheduler(FrameworkJobSchedulerService.createSchedulerFor(this, MyJobService.class), true);
+            jobManager = new JobManager(builder.build());
         } else {
-            int enableGcm = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(this);
-            if (enableGcm == ConnectionResult.SUCCESS) {
-                builder.scheduler(GcmJobSchedulerService.createSchedulerFor(this,
-                        MyGcmJobService.class), true);
-            }
+            Job myJob = dispatcher.newJobBuilder()
+                    .setService(MyFireBaseJobService.class) // the JobService that will be called
+                    .setTag("my-unique-tag")        // uniquely identifies the job
+                    .build();
+
+            dispatcher.mustSchedule(myJob);
         }
-        jobManager = new JobManager(builder.build());
     }
 
     public synchronized JobManager getJobManager() {

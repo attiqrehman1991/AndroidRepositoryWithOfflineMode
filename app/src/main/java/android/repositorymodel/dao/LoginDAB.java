@@ -56,6 +56,7 @@ public class LoginDAB extends ParentDAB {
 
         if (isInternet) {
             if (StaticInfo.JOB_QUEUE) {
+                // After adding request in the queue, the request call is executed -- check by calling onBackPress function
                 JobManager jobManager = RepositoryApplication.getInstance().getJobManager();
                 jobManager.addJobInBackground(new QueueLoginJob(parentObject, LoginDAB.this));
             } else {
