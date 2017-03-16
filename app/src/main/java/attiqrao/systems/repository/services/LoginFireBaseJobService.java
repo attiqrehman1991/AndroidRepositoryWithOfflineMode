@@ -30,7 +30,6 @@ public class LoginFireBaseJobService extends JobService {
         ParentObject parentObject = LoginDAB.parentObject;
         LoginStore store = LoginFactory.getLoginFactory().getStore(StaticInfo.NETWORK_TYPE, null);
         store.save(parentObject, this.getBaseContext());
-
         return true;
     }
 
