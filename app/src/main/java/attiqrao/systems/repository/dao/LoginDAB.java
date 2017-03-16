@@ -73,9 +73,9 @@ public class LoginDAB extends ParentDAB {
                 this.parentObject = parentObject;
                 // After adding request in the queue, the request call is executed -- check by calling onBackPress function
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    JobInfo.Builder builder = new JobInfo.Builder( 1,
-                            new ComponentName( context.getPackageName(),
-                                    LoginJobService.class.getName() ) );
+                    JobInfo.Builder builder = new JobInfo.Builder(1,
+                            new ComponentName(context.getPackageName(),
+                                    LoginJobService.class.getName()));
                     builder.setMinimumLatency(1 * 1000); // wait at least
                     builder.setOverrideDeadline(5 * 1000); // maximum delay
                     builder.setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY);
@@ -112,7 +112,6 @@ public class LoginDAB extends ParentDAB {
     }
 
     private class LoginReceiver extends BroadcastReceiver {
-
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
