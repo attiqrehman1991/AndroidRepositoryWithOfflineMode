@@ -23,6 +23,7 @@ import com.firebase.jobdispatcher.JobService;
 public class LoginFireBaseJobService extends JobService {
     private static final String TAG = "SyncService";
 
+
     @Override
     public boolean onStartJob(JobParameters jobParameters) {
 //        ParentObject parentObject = jobParameters.getExtras().getParcelable("parentObject");

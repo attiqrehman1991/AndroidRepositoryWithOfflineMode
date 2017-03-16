@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "88182267262",
+    "firebase_url": "https://repositorymodel.firebaseio.com",
+    "project_id": "repositorymodel",
+    "storage_bucket": "repositorymodel.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:88182267262:android:c6c125613d94d1b6",
+        "android_client_info": {
+          "package_name": "attiqrao.systems.repository"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "88182267262-avmvi9ngg2gb4ot2rl6nr4am1b5adqd8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "attiqrao.systems.repository",
+            "certificate_hash": "b03c8a6043628ee9b3da64a75254e7cf1d7cb45f"
+          }
+        },
+        {
+          "client_id": "88182267262-os8ks8hl37av59eh4en2hdmo8usakdpe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_UGbUgSJ83mYjkS5_djZ1vSAQ7uQ1h-4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "88182267262-os8ks8hl37av59eh4en2hdmo8usakdpe.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
