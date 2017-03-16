@@ -8,14 +8,14 @@
 
 package attiqrao.systems.repository.services;
 
+import com.firebase.jobdispatcher.JobParameters;
+import com.firebase.jobdispatcher.JobService;
+
 import attiqrao.systems.repository.dao.LoginDAB;
 import attiqrao.systems.repository.factory.loginfactory.LoginFactory;
 import attiqrao.systems.repository.factory.loginfactory.LoginStore;
 import attiqrao.systems.repository.model.ParentObject;
 import attiqrao.systems.repository.utilities.StaticInfo;
-
-import com.firebase.jobdispatcher.JobParameters;
-import com.firebase.jobdispatcher.JobService;
 
 /**
  * Created by Attiq ur Rehman.
