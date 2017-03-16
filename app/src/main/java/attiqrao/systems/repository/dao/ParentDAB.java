@@ -12,5 +12,6 @@ import android.content.Context;
 
 public abstract class ParentDAB {
     public abstract void updateDAB(Object object);
+
     public abstract void unregisterReceiver(Context context);
 }
