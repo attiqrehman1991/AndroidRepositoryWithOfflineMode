@@ -20,5 +20,6 @@ import android.content.Context;
 public abstract class MainController {
     public Context context;
     public BroadcastReceiver broadcastReceiver;
+
     public abstract void updateResponse(Object object);
 }
