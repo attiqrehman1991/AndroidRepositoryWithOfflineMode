@@ -8,12 +8,19 @@
 
 package attiqrao.systems.repository.dao;
 
+import android.app.job.JobInfo;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Build;
-import android.os.Bundle;
+
+import com.firebase.jobdispatcher.Constraint;
+import com.firebase.jobdispatcher.Job;
+
+import org.json.JSONObject;
+
 import attiqrao.systems.repository.RepositoryApplication;
 import attiqrao.systems.repository.controller.MainController;
 import attiqrao.systems.repository.factory.loginfactory.LoginFactory;
@@ -21,19 +28,14 @@ import attiqrao.systems.repository.factory.loginfactory.LoginStore;
 import attiqrao.systems.repository.model.ParentObject;
 import attiqrao.systems.repository.model.User;
 import attiqrao.systems.repository.services.LoginFireBaseJobService;
+import attiqrao.systems.repository.services.LoginJobService;
 import attiqrao.systems.repository.utilities.StaticInfo;
-
-import com.firebase.jobdispatcher.Constraint;
-import com.firebase.jobdispatcher.Job;
-
-import org.json.JSONObject;
-
 import io.realm.Realm;
-
-import static attiqrao.systems.repository.presenter.Presenter.LOGIN_SUCCESSFUL;
 
 public class LoginDAB extends ParentDAB {
 
+    public final static String LOGIN_SUCCESSFUL = "LOGIN_SUCCESSFUL";
+    public static ParentObject parentObject;
     private MainController mainController;
     private LoginReceiver loginReceiver;
 
@@ -66,23 +68,21 @@ public class LoginDAB extends ParentDAB {
 
         if (isInternet) {
             if (StaticInfo.JOB_QUEUE) {
+                loginReceiver = new LoginReceiver();
                 context.registerReceiver(loginReceiver, intentFilter);
+                this.parentObject = parentObject;
                 // After adding request in the queue, the request call is executed -- check by calling onBackPress function
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//                    ComponentName mServiceComponent = new ComponentName(this, MyJobService.class);
-//                    JobInfo.Builder builder = new JobInfo.Builder(45, mServiceComponent);
-//                    builder.setMinimumLatency(5 * 1000); // wait at least
-//                    builder.setOverrideDeadline(50 * 1000); // maximum delay
-//                    builder.setRequiredNetworkType(JobInfo.NETWORK_TYPE_UNMETERED); // require unmetered network
-//                    builder.setRequiresDeviceIdle(true); // device should be idle
-//                    builder.setRequiresCharging(false); // we don't care if the device is charging or not
-//                    JobScheduler jobScheduler = getApplication().getSystemService(Context.JOB_SCHEDULER_SERVICE);
-//                    jobScheduler.schedule(builder.build());
-//                    JobManager jobManager = RepositoryApplication.getInstance().getJobManager();
-//                    jobManager.addJobInBackground(new QueueLoginJob(parentObject, LoginDAB.this));
+                    JobInfo.Builder builder = new JobInfo.Builder( 1,
+                            new ComponentName( context.getPackageName(),
+                                    LoginJobService.class.getName() ) );
+                    builder.setMinimumLatency(1 * 1000); // wait at least
+                    builder.setOverrideDeadline(5 * 1000); // maximum delay
+                    builder.setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY);
+                    RepositoryApplication.getJobScheduler().schedule(builder.build());
                 } else {
-                    Bundle myExtrasBundle = new Bundle();
-                    myExtrasBundle.putParcelable("parentObject", parentObject);
+//                    Bundle myExtrasBundle = new Bundle();
+//                    myExtrasBundle.putParcelable("parentObject", parentObject);
                     Job myJob = RepositoryApplication.getDispatcher().newJobBuilder()
                             .addConstraint(Constraint.ON_ANY_NETWORK)
 //                            .setReplaceCurrent(false)
@@ -90,7 +90,7 @@ public class LoginDAB extends ParentDAB {
 //                            .setRecurring(false)
                             .setService(LoginFireBaseJobService.class) // the JobService that will be called
                             .setTag("login-tag")        // uniquely identifies the job
-                            .setExtras(myExtrasBundle)
+//                            .setExtras(myExtrasBundle)
                             .build();
                     RepositoryApplication.getDispatcher().mustSchedule(myJob);
                 }

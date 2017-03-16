@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import attiqrao.systems.repository.R;
+import attiqrao.systems.repository.dao.LoginDAB;
 import attiqrao.systems.repository.presenter.IPresenter;
 import attiqrao.systems.repository.presenter.Presenter;
 import attiqrao.systems.repository.utilities.StaticInfo;
@@ -71,7 +72,7 @@ public class MainActivity extends BaseActivity implements IView {
                 buttonSubmit.setEnabled(false);
                 iPresenter.setView(MainActivity.this);
                 IntentFilter intentFilter = new IntentFilter();
-                intentFilter.addAction(Presenter.LOGIN_SUCCESSFUL);
+                intentFilter.addAction(LoginDAB.LOGIN_SUCCESSFUL);
                 iPresenter.onClick(username, password, isNetworkAvailable(), MainActivity.this, intentFilter);
             }
         });

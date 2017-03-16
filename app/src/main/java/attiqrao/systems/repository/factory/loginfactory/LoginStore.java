@@ -10,10 +10,11 @@ package attiqrao.systems.repository.factory.loginfactory;
 
 import android.content.Context;
 import android.content.Intent;
-import attiqrao.systems.repository.model.ParentObject;
-import attiqrao.systems.repository.presenter.Presenter;
 
 import org.json.JSONObject;
+
+import attiqrao.systems.repository.dao.LoginDAB;
+import attiqrao.systems.repository.model.ParentObject;
 
 public abstract class LoginStore {
     protected Context context;
@@ -22,7 +23,7 @@ public abstract class LoginStore {
 
     protected void generateBroadCast(JSONObject jsonObject) {
         Intent intent = new Intent();
-        intent.setAction(Presenter.LOGIN_SUCCESSFUL);
+        intent.setAction(LoginDAB.LOGIN_SUCCESSFUL);
         intent.putExtra("json", jsonObject.toString());
         context.sendBroadcast(intent);
     }

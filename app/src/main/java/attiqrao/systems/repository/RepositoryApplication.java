@@ -8,7 +8,9 @@
 
 package attiqrao.systems.repository;
 
-import android.app.Application;
+import android.app.job.JobScheduler;
+import android.os.Build;
+import android.support.multidex.MultiDexApplication;
 
 import com.firebase.jobdispatcher.FirebaseJobDispatcher;
 import com.firebase.jobdispatcher.GooglePlayDriver;
@@ -16,12 +18,17 @@ import com.firebase.jobdispatcher.GooglePlayDriver;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 
-public class RepositoryApplication extends Application {
+public class RepositoryApplication extends MultiDexApplication {
 
     private static FirebaseJobDispatcher dispatcher;
+    private static JobScheduler jobScheduler;
 
     public static FirebaseJobDispatcher getDispatcher() {
         return dispatcher;
+    }
+
+    public static JobScheduler getJobScheduler() {
+        return jobScheduler;
     }
 
     @Override
@@ -29,6 +36,9 @@ public class RepositoryApplication extends Application {
         super.onCreate();
 
         dispatcher = new FirebaseJobDispatcher(new GooglePlayDriver(this));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            jobScheduler = (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
+        }
 
         Realm.init(this);
         RealmConfiguration config = new RealmConfiguration.Builder().build();

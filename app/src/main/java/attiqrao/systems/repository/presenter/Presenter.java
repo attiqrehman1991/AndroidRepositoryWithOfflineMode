@@ -17,7 +17,6 @@ import attiqrao.systems.repository.model.User;
 import attiqrao.systems.repository.view.IView;
 
 public class Presenter implements IPresenter {
-    public final static String LOGIN_SUCCESSFUL = "LOGIN_SUCCESSFUL";
     static IView iView;
     private static Presenter presenter;
     private LoginController loginController;
