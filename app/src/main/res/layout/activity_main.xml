@@ -4,16 +4,24 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".view.MainActivity">
+
+    <TextView
+        android:id="@+id/textViewD"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Choose Netowrk Library Or Database, Structure Even Support Offline Mode"
+        android:textSize="21sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textViewU"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewD"
+        android:layout_marginTop="5dp"
         android:text="Enter User Name" />
 
     <EditText
@@ -57,9 +65,8 @@
         android:id="@+id/progress"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/layoutBottomBar"
-        android:layout_below="@+id/buttonSubmit"
-        android:visibility="gone">
+        android:layout_above="@+id/layoutBottom"
+        android:layout_below="@+id/buttonSubmit">
 
         <ProgressBar
             android:layout_width="wrap_content"
@@ -69,50 +76,92 @@
 
     </RelativeLayout>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:text="Choose web service host"
-        android:layout_above="@+id/layoutBottomBar"
-        android:layout_height="wrap_content" />
-
     <LinearLayout
-        android:id="@+id/layoutBottomBar"
+        android:id="@+id/layoutBottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="10dp">
+        android:orientation="vertical">
 
-        <Button
-            android:id="@+id/buttonAsyncTask"
-            android:layout_width="0dp"
+        <TextView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="AsyncTask" />
+            android:text="Choose DataBaseType"
+            android:textSize="21sp"
+            android:textStyle="bold" />
 
-        <Button
-            android:id="@+id/buttonRx"
-            android:layout_width="0dp"
+        <LinearLayout
+            android:id="@+id/layoutBottomBar2"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="RX Android" />
+            android:layout_above="@+id/layoutBottomBar"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="2dp">
 
-        <Button
-            android:id="@+id/buttonRetrofit"
-            android:layout_width="0dp"
+
+            <Button
+                android:id="@+id/buttonGreenDAO"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="GreenDAO" />
+
+            <Button
+                android:id="@+id/buttonRealm"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Relam" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Retrofit" />
+            android:layout_above="@+id/layoutBottomBar"
+            android:text="Choose web service host"
+            android:textSize="21sp"
+            android:textStyle="bold" />
 
-        <Button
-            android:visibility="gone"
-            android:id="@+id/buttonVolley"
-            android:layout_width="0dp"
+        <LinearLayout
+            android:id="@+id/layoutBottomBar"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="N" />
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="2dp">
+
+            <Button
+                android:id="@+id/buttonAsyncTask"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="AsyncTask" />
+
+            <Button
+                android:id="@+id/buttonRx"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="RX Android" />
+
+            <Button
+                android:id="@+id/buttonRetrofit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Retrofit" />
+
+            <Button
+                android:id="@+id/buttonVolley"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="N"
+                android:visibility="gone" />
 
 
+        </LinearLayout>
     </LinearLayout>
 
 </RelativeLayout>
