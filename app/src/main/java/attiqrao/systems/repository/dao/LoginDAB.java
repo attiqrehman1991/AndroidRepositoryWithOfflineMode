@@ -39,6 +39,7 @@ public class LoginDAB extends ParentDAB {
     private MainController mainController;
     private LoginReceiver loginReceiver;
 
+
     @Override
     public void updateDAB(Object object) {
         JSONObject jsonObject = (JSONObject) object;
